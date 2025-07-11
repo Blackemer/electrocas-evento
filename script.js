@@ -37,18 +37,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function initParticles() {
-        particlesArray = [];
-        let numberOfParticles = (canvas.height * canvas.width) / 9000;
-        for (let i = 0; i < numberOfParticles; i++) {
-            let size = (Math.random() * 2) + 1;
-            let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-            let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-            let dX = (Math.random() * 0.4) - 0.2; let dY = (Math.random() * 0.4) - 0.2;
-            let color = Math.random() > 0.5 ? '#FF00FF' : '#00FFFF';
-            particlesArray.push(new Particle(x, y, dX, dY, size, color));
-        }
+function initParticles() {
+    particlesArray = [];
+    let numberOfParticles;
+    // Si la pantalla es pequeña (móvil), calcula un número mucho menor de partículas.
+    if (canvas.width < 768) {
+        numberOfParticles = (canvas.height * canvas.width) / 25000; // Menos densidad
+    } else {
+        numberOfParticles = (canvas.height * canvas.width) / 9000; // Densidad normal para escritorio
     }
+    
+    for (let i = 0; i < numberOfParticles; i++) {
+        let size = (Math.random() * 2) + 1;
+        let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+        let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+        let dX = (Math.random() * 0.4) - 0.2;
+        let dY = (Math.random() * 0.4) - 0.2;
+        let color = Math.random() > 0.5 ? '#FF00FF' : '#00FFFF';
+        particlesArray.push(new Particle(x, y, dX, dY, size, color));
+    }
+}
 
     function animateParticles() {
         ctx.clearRect(0, 0, innerWidth, innerHeight);

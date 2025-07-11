@@ -207,12 +207,34 @@ body {
 }
 
 /* --- Media Queries --- */
+/* --- Media Queries para Responsividad (VERSIÓN OPTIMIZADA) --- */
 @media (max-width: 768px) {
     .section-container h2 {
         font-size: 2rem;
     }
 
+    /* Ajusta el título para que no se desborde */
+    #hero h1 {
+        font-size: clamp(2.5rem, 18vw, 5rem); /* Reducimos el tamaño mínimo y máximo */
+    }
+
+    /* Hacemos el contador más flexible y pequeño */
     .countdown-container {
-        transform: scale(0.8);
+        gap: 10px; /* Reducimos el espacio entre elementos */
+        transform: none; /* Eliminamos el 'scale' para un control más preciso */
+    }
+
+    .countdown-item {
+        /* Eliminamos el ancho fijo y usamos padding para el tamaño */
+        width: auto;
+        padding: 10px 12px; 
+    }
+
+    .countdown-item span {
+        font-size: 1.8rem; /* Reducimos el tamaño de los números */
+    }
+
+    .countdown-item p {
+        font-size: 0.7rem; /* Reducimos el tamaño del texto (Días, Horas, etc.) */
     }
 }
