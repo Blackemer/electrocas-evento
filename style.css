@@ -24,7 +24,7 @@ body {
     background-color: var(--color-negro);
     color: var(--texto-principal);
     font-family: 'Montserrat', sans-serif;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Previene el scroll horizontal no deseado */
 }
 
 /* --- Animaciones de Scroll --- */
@@ -43,7 +43,7 @@ body {
 }
 
 .section-container h2 {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 5vw, 2.5rem); /* Tipografía fluida */
     font-weight: 900;
     margin-bottom: 15px;
     letter-spacing: 2px;
@@ -53,12 +53,13 @@ body {
 }
 
 .subtitle {
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 3vw, 1.1rem); /* Tipografía fluida */
     color: var(--texto-secundario);
     margin-bottom: 40px;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.6;
 }
 
 /* --- Efecto de Neón para Texto --- */
@@ -97,6 +98,7 @@ body {
 .hero-content {
     position: relative;
     z-index: 1;
+    padding: 0 15px; /* Añade un poco de padding para que el contenido no toque los bordes en móvil */
 }
 
 #hero h1 {
@@ -162,38 +164,28 @@ body {
     margin: 0 auto;
 }
 
-/* --- Galería con Botón Privado --- */
 /* --- Galería con Botón (Estilo Pre-Evento / Desactivado) --- */
 .gallery-button {
     display: inline-block;
     padding: 15px 40px;
     margin-top: 20px;
     background-color: transparent;
-    
-    /* El borde y texto se atenúan para indicar inactividad */
     color: var(--texto-secundario);
-    border: 2px solid #333; /* Un borde neutro y oscuro */
+    border: 2px solid #333;
     border-radius: 50px;
-
     font-family: inherit;
     font-size: 1rem;
     font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
     letter-spacing: 1.5px;
-    
-    /* Sin brillo de neón y con cursor que indica "no disponible" */
     box-shadow: none;
     cursor: not-allowed;
-    
-    /* La transición se mantiene para el futuro cambio de estado */
     transition: all 0.3s ease-in-out;
 }
 
-/* El efecto hover se elimina por completo para un botón inactivo */
 .gallery-button:hover {
-    /* No se aplican cambios al pasar el cursor */
-    /* El cursor "not-allowed" ya comunica la falta de interactividad */
+    /* Sin efecto hover para el botón desactivado */
 }
 
 /* --- Footer --- */
@@ -206,35 +198,54 @@ body {
     border-top: 1px solid #222;
 }
 
-/* --- Media Queries --- */
-/* --- Media Queries para Responsividad (VERSIÓN OPTIMIZADA) --- */
+/* ====================================================== */
+/* === MEJORAS CRÍTICAS PARA DISPOSITIVOS MÓVILES === */
+/* ====================================================== */
 @media (max-width: 768px) {
-    .section-container h2 {
-        font-size: 2rem;
+    /* Reducimos el espaciado vertical para optimizar el espacio en pantalla */
+    .section-container {
+        padding: 60px 20px;
     }
 
-    /* Ajusta el título para que no se desborde */
     #hero h1 {
-        font-size: clamp(2.5rem, 18vw, 5rem); /* Reducimos el tamaño mínimo y máximo */
+        /* Ajuste fino del clamp para un mejor balance en tablets y móviles grandes */
+        font-size: clamp(2.8rem, 18vw, 6rem);
     }
 
-    /* Hacemos el contador más flexible y pequeño */
     .countdown-container {
-        gap: 10px; /* Reducimos el espacio entre elementos */
-        transform: none; /* Eliminamos el 'scale' para un control más preciso */
+        gap: 10px; /* Menos espacio entre elementos del contador */
     }
 
     .countdown-item {
-        /* Eliminamos el ancho fijo y usamos padding para el tamaño */
-        width: auto;
-        padding: 10px 12px; 
+        /* Usamos flex-basis para un control más fluido del tamaño */
+        flex-basis: 0;
+        flex-grow: 1;
+        padding: 12px 8px; /* Padding ajustado para más flexibilidad */
+        width: auto; /* Sobreescribimos el ancho fijo */
+        min-width: 70px; /* Aseguramos un ancho mínimo para que no se colapse */
     }
 
     .countdown-item span {
-        font-size: 1.8rem; /* Reducimos el tamaño de los números */
+        font-size: clamp(1.5rem, 6vw, 2rem); /* Números del contador fluidos */
     }
 
     .countdown-item p {
-        font-size: 0.7rem; /* Reducimos el tamaño del texto (Días, Horas, etc.) */
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ajustes finos para los teléfonos más pequeños */
+    .section-container {
+        padding: 50px 15px; /* Aún menos padding */
+    }
+    
+    .details-grid {
+        /* Forzamos una sola columna para evitar que se vea apretado */
+        grid-template-columns: 1fr;
+    }
+
+    .subtitle {
+        margin-bottom: 30px; /* Menos margen inferior */
     }
 }

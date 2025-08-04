@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ======================================================
-    // MEJORA 1: SISTEMA DE PARTÍCULAS OPTIMIZADO
+    // SISTEMA DE PARTÍCULAS OPTIMIZADO
     // ======================================================
     const hero = document.getElementById('hero');
     const canvas = document.getElementById('hero-canvas');
@@ -37,26 +37,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-function initParticles() {
-    particlesArray = [];
-    let numberOfParticles;
-    // Si la pantalla es pequeña (móvil), calcula un número mucho menor de partículas.
-    if (canvas.width < 768) {
-        numberOfParticles = (canvas.height * canvas.width) / 25000; // Menos densidad
-    } else {
-        numberOfParticles = (canvas.height * canvas.width) / 9000; // Densidad normal para escritorio
+    function initParticles() {
+        particlesArray = [];
+        let numberOfParticles;
+        if (canvas.width < 768) {
+            numberOfParticles = (canvas.height * canvas.width) / 25000;
+        } else {
+            numberOfParticles = (canvas.height * canvas.width) / 9000;
+        }
+        
+        for (let i = 0; i < numberOfParticles; i++) {
+            let size = (Math.random() * 2) + 1;
+            let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+            let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+            let dX = (Math.random() * 0.4) - 0.2;
+            let dY = (Math.random() * 0.4) - 0.2;
+            let color = Math.random() > 0.5 ? '#FF00FF' : '#00FFFF';
+            particlesArray.push(new Particle(x, y, dX, dY, size, color));
+        }
     }
-    
-    for (let i = 0; i < numberOfParticles; i++) {
-        let size = (Math.random() * 2) + 1;
-        let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-        let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-        let dX = (Math.random() * 0.4) - 0.2;
-        let dY = (Math.random() * 0.4) - 0.2;
-        let color = Math.random() > 0.5 ? '#FF00FF' : '#00FFFF';
-        particlesArray.push(new Particle(x, y, dX, dY, size, color));
-    }
-}
 
     function animateParticles() {
         ctx.clearRect(0, 0, innerWidth, innerHeight);
@@ -64,28 +63,24 @@ function initParticles() {
         animationFrameId = requestAnimationFrame(animateParticles);
     }
     
-    // Punto Crítico #1 (JS): Observer para pausar y reanudar la animación de partículas.
     const heroObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Si el hero es visible, iniciar la animación.
                 if (!animationFrameId) {
                     animateParticles();
                 }
             } else {
-                // Si el hero no es visible, detener la animación para ahorrar recursos.
                 cancelAnimationFrame(animationFrameId);
                 animationFrameId = null;
             }
         });
-    }, { threshold: 0 }); // Se activa apenas el hero entra o sale de la vista.
+    }, { threshold: 0 });
 
     heroObserver.observe(hero);
     initParticles();
 
-
     // ======================================================
-    // MEJORA 2: ANIMACIONES DE SCROLL RECURRENTES
+    // ANIMACIONES DE SCROLL RECURRENTES
     // ======================================================
     const sections = document.querySelectorAll('.section-container');
     const sectionObserver = new IntersectionObserver((entries) => {
@@ -93,7 +88,6 @@ function initParticles() {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             } else {
-                // Punto Crítico #2 (JS): La sección se oculta al salir para re-animarse al volver.
                 entry.target.classList.remove('visible');
             }
         });
@@ -101,11 +95,11 @@ function initParticles() {
 
     sections.forEach(section => { sectionObserver.observe(section); });
 
-
     // ===============================================
-    // LÓGICA DEL COUNTDOWN
+    // LÓGICA DEL COUNTDOWN (ACTUALIZADO)
     // ===============================================
-    const eventDate = new Date('2025-08-07T19:00:00');
+    // CAMBIO: Fecha del evento actualizada al 14 de Agosto.
+    const eventDate = new Date('2025-08-14T19:00:00');
     const daysEl = document.getElementById('days'), hoursEl = document.getElementById('hours'), minutesEl = document.getElementById('minutes'), secondsEl = document.getElementById('seconds');
     const countdownContainer = document.getElementById('countdown');
 

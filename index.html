@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELECTROCAS | El Epicentro de la Energía</title>
+    <title>ELECTROPARTY | El Epicentro de la Energía</title>
+    <!-- Optimización: Pre-conexión a Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
+    <script src="script.js"></script>
 </head>
 <body>
 
     <header id="hero">
         <canvas id="hero-canvas"></canvas>
         <div class="hero-content">
-            <h1 class="glow-effect">ELECTROCAS</h1>
+            <h1 class="glow-effect">ELECTROPARTY</h1>
             <div id="countdown" class="countdown-container">
                 <div class="countdown-item"><span id="days">00</span><p>Días</p></div>
                 <div class="countdown-item"><span id="hours">00</span><p>Horas</p></div>
@@ -29,9 +31,11 @@
         <section id="details" class="section-container">
             <h2>DETALLES DEL EVENTO</h2>
             <div class="details-grid">
-                <div class="info-card"><h3>Fecha</h3><p>7 de Agosto, 2025</p></div>
+                <!-- CAMBIO: Fecha actualizada -->
+                <div class="info-card"><h3>Fecha</h3><p>14 de Agosto, 2025</p></div>
                 <div class="info-card"><h3>Hora</h3><p>7:00 PM - 9:00 PM</p></div>
-                <div class="info-card"><h3>Lugar</h3><p>Patio Central</p></div>
+                <!-- CAMBIO: Lugar actualizado para consistencia -->
+                <div class="info-card"><h3>Lugar</h3><p>Campo Central</p></div>
             </div>
         </section>
 
@@ -39,27 +43,22 @@
             <h2>LA ENERGÍA SONORA</h2>
             <p class="subtitle">Siente el ritmo del evento con la playlist oficial de nuestro DJ.</p>
             <div class="spotify-container">
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                <!-- OPTIMIZACIÓN: Añadido loading="lazy" para carga diferida -->
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
         </section>
 
-      <!-- === SECCIÓN 3: GALERÍA DE RECUERDOS (VERSIÓN FINAL) === -->
-<!-- === SECCIÓN 3: GALERÍA DE RECUERDOS (VERSIÓN PRE-EVENTO) === -->
-<section id="gallery" class="section-container">
-    <h2>GALERÍA DE RECUERDOS</h2>
-    <!-- Subtítulo actualizado para gestionar expectativas -->
-    <p class="subtitle">Después de la noche más épica, este será el portal a todos los recuerdos. La galería se activará 24 horas después del evento. ¡Prepara tu mejor pose!</p>
-    
-    <!-- Botón con estado "desactivado" -->
-    <a href="#" class="gallery-button">
-        <!-- El enlace real se añadirá después del evento -->
-        GALERÍA PRÓXIMAMENTE
-    </a>
-</section>
+      <section id="gallery" class="section-container">
+          <h2>GALERÍA DE RECUERDOS</h2>
+          <p class="subtitle">Después de la noche más épica, este será el portal a todos los recuerdos. La galería se activará 24 horas después del evento. ¡Prepara tu mejor pose!</p>
+          <a href="#" class="gallery-button">
+              GALERÍA PRÓXIMAMENTE
+          </a>
+      </section>
     </main>
 
     <footer id="footer">
-        <p>ELECTROCAS © 2025 | Una experiencia inolvidable.</p>
+        <p>ELECTROPARTY © 2025 | Una experiencia inolvidable.</p>
     </footer>
 
 </body>
