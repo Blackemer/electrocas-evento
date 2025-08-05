@@ -90,16 +90,12 @@
             z-index: -1;
         }
         .hero-content { position: relative; z-index: 1; padding: 0 15px; width: 100%; }
-        
-        /* --- ESTILO DEL TÍTULO CORREGIDO --- */
         #hero h1 {
             font-size: clamp(3.5rem, 20vw, 9rem);
             font-weight: 900;
             margin: 0;
             letter-spacing: 2px;
-            /* Se eliminó 'word-break: break-all;' para evitar que el título se rompa en pantallas pequeñas */
         }
-
         .countdown-container { display: flex; justify-content: center; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
         .countdown-item {
             background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 10px;
@@ -118,6 +114,16 @@
         }
         .info-card:hover { transform: translateY(-5px); box-shadow: 0 0 15px var(--color-azul-electrico); }
         .info-card h3 { color: var(--color-azul-electrico); margin-bottom: 10px; text-transform: uppercase; font-weight: 700; }
+        
+        /* --- ESTILO PARA EL CONTENEDOR DE SPOTIFY --- */
+        .spotify-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+        }
+
         .gallery-button {
             display: inline-block; padding: 15px 40px; margin-top: 20px; background-color: transparent;
             color: var(--texto-secundario); border: 2px solid #333; border-radius: 50px;
@@ -127,57 +133,8 @@
         #community { background-color: #111; }
         .form-container { max-width: 600px; margin: 0 auto; }
         #footer { text-align: center; padding: 20px; background-color: #000; color: var(--texto-secundario); font-size: 0.9rem; border-top: 1px solid #222; }
-        
-        /* --- ESTILOS PLAYLIST --- */
-        .playlist-container { max-width: 800px; margin: 0 auto; text-align: center; }
-        .track-list {
-            list-style: none; padding: 0; margin: 0; border: 1px solid var(--color-azul-electrico);
-            border-radius: 12px; background: rgba(10, 10, 10, 0.5); box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-            overflow: hidden; max-height: 0; opacity: 0;
-            transition: max-height 0.7s ease-in-out, opacity 0.5s ease-in, padding 0.7s ease-in-out;
-        }
-        .track-list.visible { max-height: 1000px; opacity: 1; padding: 10px 0; }
-        .track-item {
-            display: flex; align-items: center; text-decoration: none; padding: 0 10px;
-            opacity: 0; transform: translateY(10px);
-            transition: opacity 0.5s ease, transform 0.5s ease, background-color 0.3s ease;
-        }
-        .track-list.visible .track-item { opacity: 1; transform: translateY(0); }
-        .track-list.visible .track-item:nth-child(1) { transition-delay: 0.1s; }
-        .track-list.visible .track-item:nth-child(2) { transition-delay: 0.15s; }
-        .track-list.visible .track-item:nth-child(3) { transition-delay: 0.2s; }
-        .track-list.visible .track-item:nth-child(4) { transition-delay: 0.25s; }
-        .track-list.visible .track-item:nth-child(5) { transition-delay: 0.3s; }
-        .track-list.visible .track-item:nth-child(6) { transition-delay: 0.35s; }
-        .track-list.visible .track-item:nth-child(7) { transition-delay: 0.4s; }
-        .track-list.visible .track-item:nth-child(8) { transition-delay: 0.45s; }
-        .track-list.visible .track-item:nth-child(9) { transition-delay: 0.5s; }
-        .track-list.visible .track-item:nth-child(10) { transition-delay: 0.55s; }
-        .track-item:hover { background-color: rgba(255, 0, 255, 0.1); }
-        .track-rank { font-size: 1.5rem; font-weight: 700; color: var(--texto-secundario); width: 50px; flex-shrink: 0; text-align: center; }
-        .track-info { flex-grow: 1; padding: 12px 15px; text-align: left; }
-        .track-title { display: block; font-size: 1.1rem; font-weight: 700; color: var(--texto-principal); }
-        .track-artist { font-size: 0.9rem; color: var(--color-magenta); }
-        .toggle-playlist-button {
-            display: inline-block; padding: 12px 30px; margin-bottom: 25px; background-color: transparent;
-            color: var(--texto-secundario); border: 2px solid #333; border-radius: 50px; font-family: inherit;
-            font-size: 0.9rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;
-        }
-        .toggle-playlist-button:hover { color: var(--color-magenta); border-color: var(--color-magenta); }
-        .spotify-cta-button {
-            display: inline-block; padding: 15px 40px; background-color: var(--color-magenta); color: var(--color-blanco-puro);
-            border: none; border-radius: 50px; font-family: 'Montserrat', sans-serif; font-size: 1rem;
-            font-weight: 700; text-transform: uppercase; text-decoration: none; letter-spacing: 1.5px;
-            cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
-        }
-        .spotify-cta-button:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(255, 0, 255, 0.8); }
 
         @media (max-width: 768px) { .section-container { padding: 60px 20px; } }
-        @media (max-width: 480px) {
-            .track-title { font-size: 1rem; }
-            .track-artist { font-size: 0.8rem; }
-            .track-rank { font-size: 1.2rem; width: 40px; }
-        }
     </style>
 </head>
 <body>
@@ -203,28 +160,12 @@
             </div>
         </section>
 
+        <!-- SECCIÓN DE PLAYLIST RESTAURADA CON EL EMBED DE TU PLAYLIST -->
         <section id="playlist" class="section-container">
             <h2>LA ENERGÍA SONORA</h2>
-            <p class="subtitle">El Top 10 elegido por la comunidad. La música que hará vibrar la noche.</p>
-            <div class="playlist-container">
-                <button id="togglePlaylistBtn" class="toggle-playlist-button">Mostrar el Top 10</button>
-                <ol id="trackList" class="track-list">
-                    <!-- ENLACES ACTUALIZADOS Y VERIFICADOS -->
-                    <a href="https://open.spotify.com/track/6XjDF6nds4DE2BBbagZol6" target="_blank" class="track-item"><span class="track-rank">1</span><div class="track-info"><span class="track-title">Gata Only</span><span class="track-artist">FloyyMenor & Cris Mj</span></div></a>
-                    <a href="https://open.spotify.com/track/7bywjHOc0wSjGGbj04XbVi" target="_blank" class="track-item"><span class="track-rank">2</span><div class="track-info"><span class="track-title">LUNA</span><span class="track-artist">Feid & ATL Jacob</span></div></a>
-                    <a href="https://open.spotify.com/track/7iQXYTyuG13aoeHxGG28Nh" target="_blank" class="track-item"><span class="track-rank">3</span><div class="track-info"><span class="track-title">PERRO NEGRO</span><span class="track-artist">Bad Bunny & Feid</span></div></a>
-                    <a href="https://open.spotify.com/track/0FraKCXzuteblMZEcWdOtZ" target="_blank" class="track-item"><span class="track-rank">4</span><div class="track-info"><span class="track-title">La Diabla</span><span class="track-artist">Xavi</span></div></a>
-                    <a href="https://open.spotify.com/track/6CvTEtGagmzQvkUzzyKR9k" target="_blank" class="track-item"><span class="track-rank">5</span><div class="track-info"><span class="track-title">Harley Quinn</span><span class="track-artist">Fuerza Regida & Marshmello</span></div></a>
-                    <a href="https://open.spotify.com/track/2LKOHdMsL0K9KwcPRlJK2v" target="_blank" class="track-item"><span class="track-rank">6</span><div class="track-info"><span class="track-title">After Dark</span><span class="track-artist">Mr.Kitty</span></div></a>
-                    <a href="https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b" target="_blank" class="track-item"><span class="track-rank">7</span><div class="track-info"><span class="track-title">Blinding Lights</span><span class="track-artist">The Weeknd</span></div></a>
-                    <a href="https://open.spotify.com/track/7MXVkk9YMctZqd1Srtv4MB" target="_blank" class="track-item"><span class="track-rank">8</span><div class="track-info"><span class="track-title">Starboy</span><span class="track-artist">The Weeknd</span></div></a>
-                    <a href="https://open.spotify.com/track/3k3NWokhRRqEPhMk4brQSA" target="_blank" class="track-item"><span class="track-rank">9</span><div class="track-info"><span class="track-title">Ojitos Lindos</span><span class="track-artist">Bad Bunny & Bomba Estéreo</span></div></a>
-                    <a href="https://open.spotify.com/track/0e7ipj03S05BNilyu5bRzt" target="_blank" class="track-item"><span class="track-rank">10</span><div class="track-info"><span class="track-title">Rockstar</span><span class="track-artist">Post Malone</span></div></a>
-                </ol>
-                <!-- BOTÓN DE PLAYLIST COMPLETA CON ENLACE FUNCIONAL -->
-                <a href="https://open.spotify.com/playlist/71Iw5J1zBmbbPEOuNtL6SJ" target="_blank" class="spotify-cta-button">
-                    Escuchar Playlist Completa
-                </a>
+            <p class="subtitle">Siente el ritmo del evento con la playlist oficial de la comunidad.</p>
+            <div class="spotify-container">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/71Iw5J1zBmbbPEOuNtL6SJ?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
         </section>
 
@@ -276,14 +217,7 @@
             const timer = setInterval(updateCountdown, 1000);
             updateCountdown();
 
-            const toggleBtn = document.getElementById('togglePlaylistBtn');
-            const trackList = document.getElementById('trackList');
-            if(toggleBtn && trackList) {
-                toggleBtn.addEventListener('click', () => {
-                    trackList.classList.toggle('visible');
-                    toggleBtn.textContent = trackList.classList.contains('visible') ? 'Ocultar el Top 10' : 'Mostrar el Top 10';
-                });
-            }
+            // Ya no se necesita el script para el botón de la playlist
         });
     </script>
 </body>
