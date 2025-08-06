@@ -56,17 +56,10 @@
             margin-right: auto;
             line-height: 1.6;
         }
-        .glow-effect { 
-            color: var(--color-blanco-puro);
-            animation: soft-glow 8s ease-in-out infinite alternate;
-        }
-        @keyframes soft-glow {
-            0% { text-shadow: 0 0 7px var(--color-magenta), 0 0 10px var(--color-magenta), 0 0 20px var(--color-azul-electrico); }
-            100% { text-shadow: 0 0 10px var(--color-magenta), 0 0 20px var(--color-magenta), 0 0 40px var(--color-azul-electrico); }
-        }
         #hero {
             height: 100vh;
             display: flex;
+            flex-direction: column; /* Cambiado para apilar SVG y countdown */
             justify-content: center;
             align-items: center;
             text-align: center;
@@ -89,18 +82,17 @@
             animation: move-stars 150s linear infinite;
             z-index: -1;
         }
-        .hero-content { position: relative; z-index: 1; padding: 0 15px; width: 100%; }
+        .hero-content { position: relative; z-index: 1; padding: 0 15px; width: 100%; display: flex; flex-direction: column; align-items: center;}
         
-        /* --- ESTILO DEL TÍTULO: SOLUCIÓN DEFINITIVA Y ROBUSTA --- */
-        #hero h1 {
-            /* Fórmula de escalado mucho más agresiva para adaptarse a cualquier móvil */
-            font-size: clamp(1rem, 24vw, 9rem);
-            font-weight: 900;
-            margin: 0;
-            letter-spacing: 1px;
-            /* Regla inquebrantable para que el texto nunca se divida */
-            white-space: nowrap;
-            text-align: center;
+        /* --- ESTILO PARA EL TÍTULO SVG --- */
+        .svg-title-container {
+            width: 90%;
+            max-width: 1000px;
+            animation: svg-glow 8s ease-in-out infinite alternate;
+        }
+        @keyframes svg-glow {
+            from { filter: drop-shadow(0 0 7px var(--color-magenta)) drop-shadow(0 0 20px var(--color-azul-electrico)); }
+            to   { filter: drop-shadow(0 0 10px var(--color-magenta)) drop-shadow(0 0 40px var(--color-azul-electrico)); }
         }
 
         .countdown-container { display: flex; justify-content: center; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
@@ -113,23 +105,15 @@
         .countdown-item p { font-size: 0.8rem; text-transform: uppercase; color: var(--texto-secundario); }
         .details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .info-card {
-            background: var(--fondo-tarjeta);
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px solid var(--color-azul-electrico);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--fondo-tarjeta); padding: 25px; border-radius: 10px;
+            border: 1px solid var(--color-azul-electrico); transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .info-card:hover { transform: translateY(-5px); box-shadow: 0 0 15px var(--color-azul-electrico); }
         .info-card h3 { color: var(--color-azul-electrico); margin-bottom: 10px; text-transform: uppercase; font-weight: 700; }
-        
         .spotify-container {
-            max-width: 800px;
-            margin: 0 auto;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+            max-width: 800px; margin: 0 auto; border-radius: 12px;
+            overflow: hidden; box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
         }
-
         .gallery-button {
             display: inline-block; padding: 15px 40px; margin-top: 20px; background-color: transparent;
             color: var(--texto-secundario); border: 2px solid #333; border-radius: 50px;
@@ -139,7 +123,6 @@
         #community { background-color: #111; }
         .form-container { max-width: 600px; margin: 0 auto; }
         #footer { text-align: center; padding: 20px; background-color: #000; color: var(--texto-secundario); font-size: 0.9rem; border-top: 1px solid #222; }
-
         @media (max-width: 768px) { .section-container { padding: 60px 20px; } }
     </style>
 </head>
@@ -147,7 +130,13 @@
     <header id="hero">
         <div id="stars-background"></div>
         <div class="hero-content">
-            <h1 class="glow-effect">ELECTROPARTY</h1>
+            <div class="svg-title-container">
+                <svg viewBox="0 0 1200 150" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="50%" dy=".35em" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="120" font-weight="900" fill="white" letter-spacing="10">
+                        ELECTROPARTY
+                    </text>
+                </svg>
+            </div>
             <div id="countdown" class="countdown-container">
                 <div class="countdown-item"><span id="days">00</span><p>Días</p></div>
                 <div class="countdown-item"><span id="hours">00</span><p>Horas</p></div>
@@ -165,22 +154,18 @@
                 <div class="info-card"><h3>Lugar</h3><p>Campo Central</p></div>
             </div>
         </section>
-
         <section id="playlist" class="section-container">
             <h2>LA ENERGÍA SONORA</h2>
             <p class="subtitle">Siente el ritmo del evento con la playlist oficial de la comunidad.</p>
             <div class="spotify-container">
-                <!-- IFRAME CON LA PLAYLIST ACTUALIZADA -->
                 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/71Iw5J1zBmbbPEOuNtL6SJ?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
         </section>
-
         <section id="gallery" class="section-container">
             <h2>GALERÍA DE RECUERDOS</h2>
             <p class="subtitle">Después de la noche más épica, este será el portal a todos los recuerdos. La galería se activará 24 horas después del evento.</p>
             <a href="#" class="gallery-button">GALERÍA PRÓXIMAMENTE</a>
         </section>
-
         <section id="community" class="section-container">
             <h2>ÚNETE AL CÍRCULO INTERNO</h2>
             <p class="subtitle">Recibe el documento con todos los detalles y sorpresas exclusivas. Es gratis. Es para ti.</p>
@@ -189,11 +174,9 @@
             </div>
         </section>
     </main>
-
     <footer id="footer">
         <p>ELECTROPARTY © 2025 | Una experiencia inolvidable.</p>
     </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('.section-container');
@@ -205,7 +188,6 @@
                 });
             }, { threshold: 0.15 });
             sections.forEach(section => { sectionObserver.observe(section); });
-
             const eventDate = new Date('2025-08-14T19:00:00');
             const daysEl = document.getElementById('days'), hoursEl = document.getElementById('hours'), minutesEl = document.getElementById('minutes'), secondsEl = document.getElementById('seconds');
             const countdownContainer = document.getElementById('countdown');
