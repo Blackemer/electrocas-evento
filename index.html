@@ -91,13 +91,15 @@
         }
         .hero-content { position: relative; z-index: 1; padding: 0 15px; width: 100%; }
         
-        /* --- ESTILO DEL TÍTULO CORREGIDO Y OPTIMIZADO --- */
+        /* --- ESTILO DEL TÍTULO: SOLUCIÓN DEFINITIVA --- */
         #hero h1 {
-            /* Se ajustó el valor 'vw' para un escalado más agresivo en móviles, evitando el desbordamiento. */
-            font-size: clamp(3.5rem, 15vw, 9rem);
+            /* Fórmula de escalado más agresiva para adaptarse a cualquier móvil */
+            font-size: clamp(2.5rem, 24vw, 9rem);
             font-weight: 900;
             margin: 0;
             letter-spacing: 2px;
+            /* Regla inquebrantable para que el texto nunca se divida */
+            white-space: nowrap;
         }
 
         .countdown-container { display: flex; justify-content: center; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
@@ -167,6 +169,7 @@
             <h2>LA ENERGÍA SONORA</h2>
             <p class="subtitle">Siente el ritmo del evento con la playlist oficial de la comunidad.</p>
             <div class="spotify-container">
+                <!-- IFRAME CON LA PLAYLIST ACTUALIZADA -->
                 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/71Iw5J1zBmbbPEOuNtL6SJ?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
         </section>
