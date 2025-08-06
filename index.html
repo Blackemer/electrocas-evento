@@ -90,12 +90,16 @@
             z-index: -1;
         }
         .hero-content { position: relative; z-index: 1; padding: 0 15px; width: 100%; }
+        
+        /* --- ESTILO DEL TÍTULO CORREGIDO Y OPTIMIZADO --- */
         #hero h1 {
-            font-size: clamp(3.5rem, 20vw, 9rem);
+            /* Se ajustó el valor 'vw' para un escalado más agresivo en móviles, evitando el desbordamiento. */
+            font-size: clamp(3.5rem, 15vw, 9rem);
             font-weight: 900;
             margin: 0;
             letter-spacing: 2px;
         }
+
         .countdown-container { display: flex; justify-content: center; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
         .countdown-item {
             background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 10px;
@@ -115,7 +119,6 @@
         .info-card:hover { transform: translateY(-5px); box-shadow: 0 0 15px var(--color-azul-electrico); }
         .info-card h3 { color: var(--color-azul-electrico); margin-bottom: 10px; text-transform: uppercase; font-weight: 700; }
         
-        /* --- ESTILO PARA EL CONTENEDOR DE SPOTIFY --- */
         .spotify-container {
             max-width: 800px;
             margin: 0 auto;
@@ -160,7 +163,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN DE PLAYLIST RESTAURADA CON EL EMBED DE TU PLAYLIST -->
         <section id="playlist" class="section-container">
             <h2>LA ENERGÍA SONORA</h2>
             <p class="subtitle">Siente el ritmo del evento con la playlist oficial de la comunidad.</p>
@@ -216,8 +218,6 @@
             };
             const timer = setInterval(updateCountdown, 1000);
             updateCountdown();
-
-            // Ya no se necesita el script para el botón de la playlist
         });
     </script>
 </body>
