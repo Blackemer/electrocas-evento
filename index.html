@@ -91,15 +91,16 @@
         }
         .hero-content { position: relative; z-index: 1; padding: 0 15px; width: 100%; }
         
-        /* --- ESTILO DEL TÍTULO: SOLUCIÓN DEFINITIVA --- */
+        /* --- ESTILO DEL TÍTULO: SOLUCIÓN DEFINITIVA Y ROBUSTA --- */
         #hero h1 {
-            /* Fórmula de escalado más agresiva para adaptarse a cualquier móvil */
-            font-size: clamp(2.5rem, 24vw, 9rem);
+            /* Fórmula de escalado mucho más agresiva para adaptarse a cualquier móvil */
+            font-size: clamp(1rem, 24vw, 9rem);
             font-weight: 900;
             margin: 0;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             /* Regla inquebrantable para que el texto nunca se divida */
             white-space: nowrap;
+            text-align: center;
         }
 
         .countdown-container { display: flex; justify-content: center; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
